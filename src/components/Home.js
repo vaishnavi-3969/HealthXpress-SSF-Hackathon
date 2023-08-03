@@ -49,7 +49,7 @@ const Home = () => {
     <div className="min-h-screen bg-gradient-to-b from-blue-500 via-green-400 to-yellow-300 flex flex-col items-center">
       <div className="text-black text-center p-8">
         <img src={Logo} alt="HealthXpress Logo" className="w-24 mx-auto mb-2" />
-        <h1 className="text-4xl font-semibold mb-4">Welcome to HealthXpress</h1>
+        <h1 className="text-4xl font-semibold mb-4 text-yellow-200">Welcome to HealthXpress</h1>
         {isAuthenticated ? (
           <div className="flex justify-end items-center mb-4">
             <p className="text-lg mr-4">Welcome, {user.name}!</p>
@@ -115,12 +115,16 @@ const Home = () => {
           Discover hospitals and healthcare providers near you for immediate assistance.
         </p>
         {!isAuthenticated && (
-          <button
+         <div>
+         <button
             onClick={() => loginWithRedirect({ screen_hint: 'signup' })}
             className="bg-blue-500 hover:bg-blue-600 text-black py-2 px-4 rounded-md mt-4"
           >
+            <div className='flex'>
             <FiUserPlus className="mr-2" /> Login
+            </div>
           </button>
+         </div>
         )}
          {/* Display Nearby Hospitals */}
          {userLocation && (
