@@ -1,5 +1,5 @@
 import React from 'react';
-import { FiUser, FiBriefcase, FiShoppingCart, FiPhone, FiMail, FiLogOut } from 'react-icons/fi';
+import { FiUser, FiBriefcase, FiShoppingCart, FiPhone, FiMail, FiLogOut, FiUserPlus } from 'react-icons/fi';
 import { motion } from 'framer-motion';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Link } from 'react-router-dom';
@@ -12,7 +12,7 @@ const cardVariants = {
 
 const Home = () => {
   const { loginWithRedirect, isAuthenticated, user, logout } = useAuth0();
-
+  
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-500 via-green-400 to-yellow-300 flex flex-col items-center">
       <div className="text-white text-center p-8">
@@ -87,7 +87,7 @@ const Home = () => {
             onClick={() => loginWithRedirect({ screen_hint: 'signup' })}
             className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md mt-4"
           >
-            Login
+            <FiUserPlus className="mr-2" /> Login
           </button>
         )}
       </div>
