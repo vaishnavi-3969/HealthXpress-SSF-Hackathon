@@ -3,13 +3,18 @@ import { motion } from 'framer-motion';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Link } from 'react-router-dom';
 import { FiMapPin, FiPhone, FiClock } from 'react-icons/fi';
+import Confetti from 'react-confetti';
 
 const OnlineBooking = () => {
-  const { user } = useAuth0();
+    const { user } = useAuth0();
   const [userLocation, setUserLocation] = useState(null);
   const [nearbyHospitals, setNearbyHospitals] = useState([]);
-
-  useEffect(() => {
+  const [selectedHospital, setSelectedHospital] = useState(null);
+  const [selectedSlot, setSelectedSlot] = useState(null);
+  const [isBookingConfirmed, setIsBookingConfirmed] = useState(false);
+  const [showDialog, setShowDialog] = useState(false);
+  
+    useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       position => {
         const { latitude, longitude } = position.coords;
@@ -31,7 +36,6 @@ const OnlineBooking = () => {
       );
       const data = await response.json();
 
-      // Calculate distances and setNearbyHospitals
       const hospitalsWithDistances = data.features.map(hospital => ({
         ...hospital,
         distance: calculateDistance(
@@ -48,7 +52,7 @@ const OnlineBooking = () => {
   };
 
   const calculateDistance = (lat1, lon1, lat2, lon2) => {
-    const R = 6371; // Radius of the Earth in km
+    const R = 6371;
     const dLat = deg2rad(lat2 - lat1);
     const dLon = deg2rad(lon2 - lon1);
     const a =
@@ -63,6 +67,17 @@ const OnlineBooking = () => {
     return deg * (Math.PI / 180);
   };
 
+  const handleSlotSelection = (hospital, slot) => {
+    setSelectedHospital(hospital);
+    setSelectedSlot(slot);
+    setShowDialog(true);
+  };
+
+  const handleConfirmBooking = () => {
+    setIsBookingConfirmed(true);
+    setShowDialog(false);
+  };
+  
   const cardVariants = {
     whileHover: { scale: 1.05 },
     whileTap: { scale: 0.95 }
@@ -82,8 +97,9 @@ const OnlineBooking = () => {
                   whileHover="whileHover"
                   whileTap="whileTap"
                   className="bg-gray-800 p-4 rounded-lg shadow-md transition-all transform cursor-pointer"
+                  onClick={() => handleSlotSelection(hospital, '9:00 AM - 10:00 AM')}
                 >
-                  <Link to={`/hospital/${hospital.id}`} className="flex flex-col h-full text-white">
+                  <Link to="#" className="flex flex-col h-full text-white">
                     <h3 className="text-xl font-semibold mb-1">{hospital.text}</h3>
                     <p className="text-sm mb-2">{hospital.properties.address}</p>
                     <div className="flex justify-between items-center">
@@ -103,6 +119,35 @@ const OnlineBooking = () => {
           </div>
         )}
       </div>
+
+      {/* Styled Dialog Box */}
+      {showDialog && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40">
+          <div className="bg-white rounded-lg p-6">
+            <h2 className="text-xl font-semibold mb-2">Confirm Booking</h2>
+            <p>Confirm your booking at {selectedHospital && selectedHospital.text} on {selectedSlot}?</p>
+            <div className="mt-4 flex justify-end">
+              <button className="mr-2 px-4 py-2 bg-red-500 text-white rounded-md" onClick={() => setShowDialog(false)}>
+                Cancel
+              </button>
+              <button className="px-4 py-2 bg-blue-500 text-white rounded-md" onClick={handleConfirmBooking}>
+                Confirm
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Confetti and Booking Confirmed */}
+      {isBookingConfirmed && (
+        <div className="fixed inset-0 flex items-center justify-center">
+          <Confetti width={500} height={500} />
+          <div className="bg-white rounded-lg p-6 text-center">
+            <h3 className="text-xl font-semibold mb-2">Booking Confirmed</h3>
+            <p>Your appointment at {selectedHospital && selectedHospital.text} on {selectedSlot} is confirmed!</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
