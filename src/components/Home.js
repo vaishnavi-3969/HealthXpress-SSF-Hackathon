@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FiUser, FiBriefcase, FiShoppingCart, FiPhone, FiMail, FiLogOut, FiUserPlus } from 'react-icons/fi';
 import { motion } from 'framer-motion';
 import { useAuth0 } from '@auth0/auth0-react';
@@ -12,10 +12,42 @@ const cardVariants = {
 
 const Home = () => {
   const { loginWithRedirect, isAuthenticated, user, logout } = useAuth0();
+  const [userLocation, setUserLocation] = useState(null);
+  const [nearbyHospitals, setNearbyHospitals] = useState([]);
   
+  useEffect(() => {
+    // Fetch user's location
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        const { latitude, longitude } = position.coords;
+        setUserLocation({ latitude, longitude });
+
+        // Fetch nearby hospitals using Mapbox API
+        fetchNearbyHospitals(latitude, longitude);
+      },
+      error => {
+        console.error(error);
+      }
+    );
+  }, []);
+
+  const fetchNearbyHospitals = async (latitude, longitude) => {
+    try {
+      const mapboxApiKey = 'pk.eyJ1IjoidmFpc2huYXZpMzk2OSIsImEiOiJjbGpiOGhqd2UxdGdyM2hxbm1vMDZxa2JqIn0.nsJYS6QQxVmEr2ZajJywYQ';
+      const response = await fetch(
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/hospital.json?proximity=${longitude},${latitude}&access_token=${mapboxApiKey}`
+      );
+      const data = await response.json();
+
+      setNearbyHospitals(data.features);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-500 via-green-400 to-yellow-300 flex flex-col items-center">
-      <div className="text-white text-center p-8">
+      <div className="text-black text-center p-8">
         <img src={Logo} alt="HealthXpress Logo" className="w-24 mx-auto mb-2" />
         <h1 className="text-4xl font-semibold mb-4">Welcome to HealthXpress</h1>
         {isAuthenticated ? (
@@ -85,11 +117,33 @@ const Home = () => {
         {!isAuthenticated && (
           <button
             onClick={() => loginWithRedirect({ screen_hint: 'signup' })}
-            className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md mt-4"
+            className="bg-blue-500 hover:bg-blue-600 text-black py-2 px-4 rounded-md mt-4"
           >
             <FiUserPlus className="mr-2" /> Login
           </button>
         )}
+         {/* Display Nearby Hospitals */}
+         {userLocation && (
+          <div className="mt-6">
+            <h2 className="text-xl mb-2">Nearby Hospitals</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {nearbyHospitals.map((hospital, index) => (
+                <motion.div
+                  key={index}
+                  variants={cardVariants}
+                  whileHover="whileHover"
+                  whileTap="whileTap"
+                  className="bg-white p-4 rounded-lg shadow-md transition-all transform"
+                >
+                  <FiBriefcase className="text-4xl mb-2 text-green-500 mx-auto" />
+                  <h3 className="text-xl font-semibold mb-1">{hospital.text}</h3>
+                  <p className="text-sm">{hospital.properties.address}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        )}
+
       </div>
     </div>
   );
