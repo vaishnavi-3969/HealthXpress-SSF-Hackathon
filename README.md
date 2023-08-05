@@ -1,13 +1,14 @@
-This project was bootstrapped with Create React App.
+This project is bootstrapped with Create React App.
 
-Introduction
+Introduction :
 Welcome to the project! This is a React application built using Create React App, a toolchain provided by Facebook for bootstrapping and setting up React applications quickly and efficiently.
 
-Prerequisites
+Prerequisites :
 Before you get started, ensure that you have the following prerequisites installed on your system:
 
 -Node.js (v12 or higher) - JavaScript runtime environment.
 -npm (v6 or higher) - Node Package Manager.
+
 Getting Started
 To run the application locally on your machine, follow these steps:
 
@@ -67,9 +68,11 @@ Advanced Configuration
 
 Advanced Configuration
 Troubleshooting
-If you encounter any issues while using Create React App or running the build, you can refer to the following documentation for troubleshooting tips:
+-If you encounter any issues while using Create React App or running the build, you can refer to the following documentation for troubleshooting tips:
 
 Troubleshooting Build Failures
+
+
 Conclusion
 Congratulations! You are now all set to start working on this React application. If you have any questions or need further assistance, feel free to reach out to the project maintainers.
 
