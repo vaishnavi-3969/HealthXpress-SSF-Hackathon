@@ -17,6 +17,8 @@ import FitnessWellnessCommunity from './components/Individuals/Fitness_Wellness_
 import HealthEducationPlatform from './components/Individuals/Education/HealthEducationPlatform';
 import EmergencySupport from './components/Individuals/Emergency/EmergencySupport';
 import LanguageAccessibility from './components/Individuals/Accessibility/LanguageAccessibilty';
+import HospitalHome from './components/Hospitals/HospitalHome';
+import PharmacyHome from './components/Pharmacies/PharmacyHome';
 
 function App() {
   return (
@@ -27,6 +29,7 @@ function App() {
      </div>
       <Routes>
         <Route path="/" element={<Home/>} exact/>
+        {/* For Individual Users */}
         <Route path='/individual' element={<IndividualHome/>} exact/>
         <Route path='/individual/online_booking' element={<OnlineBooking/>} exact/>
         <Route path='/individual/telemedicine' element={<Telemedicine/>} exact/>
@@ -42,6 +45,10 @@ function App() {
         <Route path='/individual/health_education_and_awareness' element={<HealthEducationPlatform/>} exact/>
         <Route path='/individual/emergency_support' element={<EmergencySupport/>} exact/>
         <Route path='/individual/language_and_accessibility_support' element={<LanguageAccessibility/>} exact/>
+        {/* For Hospitals */}
+        <Route path="/hospital" element={<HospitalHome/>} exact/>
+        {/* For Pharmacies */} 
+        <Route path='/pharmacy' element={<PharmacyHome/>} exact/>
       </Routes>
       <div>
         <Footer/>
