@@ -72,41 +72,49 @@ const IndividualHome = () => {
             title: 'Fitness and Wellness Community',
             description: 'Join an online community focused on fitness and well-being.\nShare workout routines, healthy recipes, and wellness tips.\nTrack personal fitness goals and progress.',
             icon: <FiDollarSign className="text-5xl mb-4 text-green-500" />,
+            link: 'fitness_and_wellness_community'
         },
         {
             title: 'Healthcare Donation and Fundraising',
             description: 'Contribute to medical fundraisers for individuals in need.\nCreate fundraising campaigns for medical expenses.\nAccept donations securely through the platform.',
             icon: <FiClipboard className="text-5xl mb-4 text-purple-500" />,
+            link:'crowdfunding'
         },
         {
             title: 'Health Education and Awareness Platform',
             description: 'Offer online courses and resources on health topics.\nProvide interactive quizzes and educational materials.\nRaise awareness about preventive healthcare measures.',
             icon: <FiMonitor className="text-5xl mb-4 text-blue-500" />,
+            link:'health_education_and_awareness'
         },
         {
             title: 'User Profiles and Personalization',
             description: 'Allow users to create accounts and manage their profiles.\nCustomize content recommendations based on user preferences.\nTrack appointment history, health data, and activity.',
             icon: <FiUser className="text-5xl mb-4 text-red-500" />,
+            link:'profile_and_settings',
         },
         {
             title: 'Feedback and Reviews',
             description: 'Enable users to provide feedback and reviews for healthcare services.\nHelp users make informed decisions based on others\' experiences.',
             icon: <FiStar className="text-5xl mb-4 text-green-500" />,
+            link:'feedback_and_reviews'
         },
         {
             title: 'Notifications and Reminders',
             description: 'Send notifications for upcoming appointments, medication doses, and health goals.\nAllow users to set personalized reminders for health-related tasks.',
             icon: <FiBell className="text-5xl mb-4 text-purple-500" />,
+            link:'notification_and_remainders',
         },
         {
             title: 'Emergency Support',
             description: 'Provide emergency contact information and resources.\nOffer a quick way for users to seek urgent medical help.',
             icon: <FiPhone className="text-5xl mb-4 text-red-500" />,
+            link:'emergency_support',
         },
         {
             title: 'Language and Accessibility Support',
             description: 'Ensure the app is accessible to users with disabilities.\nOffer language options to cater to diverse user groups.',
             icon: <FiGlobe className="text-5xl mb-4 text-blue-500" />,
+            link:'la'
         },
     ];
     return (
