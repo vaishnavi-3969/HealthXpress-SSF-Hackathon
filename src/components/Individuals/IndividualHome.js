@@ -114,7 +114,7 @@ const IndividualHome = () => {
             title: 'Language and Accessibility Support',
             description: 'Ensure the app is accessible to users with disabilities.\nOffer language options to cater to diverse user groups.',
             icon: <FiGlobe className="text-5xl mb-4 text-blue-500" />,
-            link:'la'
+            link:'language_and_accessibility_support'
         },
     ];
     return (
