@@ -51,6 +51,7 @@ const Home = () => {
         <img src={Logo} alt="HealthXpress Logo" className="w-24 mx-auto mb-2" />
         <h1 className="text-4xl font-semibold mb-4 text-yellow-200">Welcome to HealthXpress</h1>
         {isAuthenticated ? (
+          <div>
           <div className="flex justify-end items-center mb-4">
             <p className="text-lg mr-4">Welcome, {user.name}!</p>
             <button
@@ -60,12 +61,7 @@ const Home = () => {
               <FiLogOut className="text-2xl" />
             </button>
           </div>
-        ) : (
-          <p className="text-lg mb-4">
-            Your Journey to Better Health Begins Here. Choose your role to get started:
-          </p>
-        )}
-        <div className="flex gap-4 justify-center mb-6">
+          <div className="flex gap-4 justify-center mb-6">
           <Link to="/individual" className="w-64">
             <motion.div
               variants={cardVariants}
@@ -111,6 +107,13 @@ const Home = () => {
             <FiMail className="inline-block ml-2" />
           </a>
         </div>
+        </div>
+        ) : (
+          <p className="text-lg mb-4">
+            Your Journey to Better Health Begins Here. Choose your role to get started:
+          </p>
+        )}
+        
         <p className="mt-6 text-sm italic">
           Discover hospitals and healthcare providers near you for immediate assistance.
         </p>
