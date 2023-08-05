@@ -37,6 +37,7 @@ function App() {
         <Route path='/individual/online_pharmacy' element={<PharmacyCatalog/>} exact/>
         <Route path='/individual/notification_and_remainders' element={<NotificationsAndReminders/>} exact/>
         <Route path='/individual/profile_and_settings' element={<UserProfile/>} exact/>
+        <Route path='/profile' element={<UserProfile/>} exact/>
         <Route path='/individual/feedback_and_reviews' element={<FeedbackAndReviews/>} exact/>
         <Route path='/individual/heath_information_portal' element={<HealthInformationPortal/>} exact/>
         <Route path='/individual/remote_health_monitoring' element={<RemoteHealthMonitoring/>} exact/>
